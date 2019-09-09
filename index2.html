@@ -1,287 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/node_modules/patternfly/dist/css/patternfly.css">
-  <link rel="stylesheet" type="text/css" href="/node_modules/patternfly/dist/css/patternfly-additions.css">
-</head>
-<body>
+import React from 'react';
+import {
+  Avatar,
+  Brand,
+  Breadcrumb,
+  BreadcrumbItem,
+  Button,
+  ButtonVariant,
+  Card,
+  CardBody,
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownSeparator,
+  Gallery,
+  GalleryItem,
+  KebabToggle,
+  Nav,
+  NavItem,
+  NavList,
+  NavVariants,
+  Page,
+  PageHeader,
+  PageSection,
+  PageSectionVariants,
+  SkipToContent,
+  TextContent,
+  Text,
+  Toolbar,
+  ToolbarGroup,
+  ToolbarItem
+} from '@patternfly/react-core';
+// make sure you've installed @patternfly/patternfly
+import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
+import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
+import { css } from '@patternfly/react-styles';
+import { BellIcon, CogIcon } from '@patternfly/react-icons';
+import imgBrand from './imgBrand.png';
+import imgAvatar from './imgAvatar.svg';
 
+class PageLayoutHorizontalNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDropdownOpen: false,
+      isKebabDropdownOpen: false,
+      activeItem: 0
+    };
+  }
 
-  <script src="/node_modules/jquery/dist/jquery.js"></script>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-<script src="components/c3/c3.min.js"></script>
-<script src="components/d3/d3.min.js"></script>
-<script src="components/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+  onDropdownToggle = isDropdownOpen => {
+    this.setState({
+      isDropdownOpen
+    });
+  };
 
-<div class="pf-c-page" id="page-layout-expandable-nav">
-  <a class="pf-c-skip-to-content pf-c-button pf-m-primary" href="#main-content-page-layout-expandable-nav">
-    Skip to content
-  </a>
-  <header role="banner" class="pf-c-page__header">
-    <div class="pf-c-page__header-brand">
-      <div class="pf-c-page__header-brand-toggle">
-        <button class="pf-c-button pf-m-plain" type="button" id="page-layout-expandable-nav-nav-toggle" aria-label="Global navigation" aria-expanded="true" aria-controls="page-layout-expandable-nav-expandable-nav">
-          <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
-      </div>
-      <a class="pf-c-page__header-brand-link">
-        <img class="pf-c-brand" src="/assets/images/PF-Masthead-Logo.svg" alt="PatternFly logo">
-      </a>
-    </div>
-    <div class="pf-c-page__header-tools">
-      <div class="pf-c-page__header-tools-group pf-m-icons">
-        <button class="pf-c-button pf-m-plain" type="button" aria-label="Alerts">
-          <i class="fas fa-bell" aria-hidden="true"></i>
-        </button>
-        <button class="pf-c-button pf-m-plain" type="button" aria-label="Settings">
-          <i class="fas fa-cog" aria-hidden="true"></i>
-        </button>
-      </div>
-      <div class="pf-c-page__header-tools-group">
-        <div class="pf-c-dropdown">
-          <button class="pf-c-dropdown__toggle pf-m-mobile pf-m-plain" id="page-layout-expandable-nav-dropdown-kebab-right-aligned-1-button" aria-expanded="false" aria-label="Actions">
-            <i class="fas fa-ellipsis-v" aria-hidden="true"></i></button>
-          <ul class="pf-c-dropdown__menu pf-m-align-right" aria-labelledby="page-layout-expandable-nav-dropdown-kebab-right-aligned-1-button" hidden>
-            <li><a class="pf-c-dropdown__menu-item" href="#">Link</a></li>
-            <li><button class="pf-c-dropdown__menu-item">Action</button></li>
-            <li><a class="pf-c-dropdown__menu-item pf-m-disabled" aria-disabled="true" tabindex="-1" href="#">Disabled link</a></li>
-            <li><button class="pf-c-dropdown__menu-item" disabled>Disabled action</button></li>
-            <li class="pf-c-divider" role="separator">
-            </li>
-            <li><a class="pf-c-dropdown__menu-item" href="#">Separated link</a></li>
-          </ul>
-        </div>
-        <div class="pf-m-user">
-          <div class="pf-c-dropdown">
-            <button class="pf-c-dropdown__toggle pf-m-plain" id="page-layout-expandable-nav-dropdown-button" aria-expanded="false">
-              <span class="pf-c-dropdown__toggle-text"
-              >
-                          John Smith
-              </span>
-              <i class="fas fa-caret-down pf-c-dropdown__toggle-icon" aria-hidden="true"></i></button>
-            <div class="pf-c-dropdown__menu" hidden>
-              [Panel contents here]
-            </div>
-          </div>
-        </div>
-      </div>
-      <img class="pf-c-avatar" src="/assets/images/img_avatar.svg" alt="Avatar image">
-    </div>
-  </header>
-  <div class="pf-c-page__sidebar">
-    <div class="pf-c-page__sidebar-body">
-      <nav class="pf-c-nav" id="page-layout-expandable-nav-expandable-nav" aria-label="Global">
-        <ul class="pf-c-nav__list">
-          <li class="pf-c-nav__item pf-m-expandable pf-m-expanded pf-m-current">
-            <a href="#" class="pf-c-nav__link" id="expandable-nav-link1" aria-expanded="true">
-              System panel
-              <span class="pf-c-nav__toggle"
-              >
-                      <i class="fas fa-angle-right" aria-hidden="true"></i>
-              </span>
-            </a>
-            <section class="pf-c-nav__subnav" aria-labelledby="expandable-nav-link1">
-              <ul class="pf-c-nav__simple-list">
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Overview
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link pf-m-current" aria-current="page">
-                    Resource usage
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Hypervisors
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link pf-m-separator">
-                    Instances
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Volumes
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Networks
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </li>
-          <li class="pf-c-nav__item pf-m-expandable">
-            <a href="#" class="pf-c-nav__link" id="expandable-nav-link2" aria-expanded="false">
-              Policy
-              <span class="pf-c-nav__toggle"
-              >
-                      <i class="fas fa-angle-right" aria-hidden="true"></i>
-              </span>
-            </a>
-            <section class="pf-c-nav__subnav" aria-labelledby="expandable-nav-link2" hidden>
-              <ul class="pf-c-nav__simple-list">
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Subnav link 1
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Subnav link 2
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </li>
-          <li class="pf-c-nav__item pf-m-expandable">
-            <a href="#" class="pf-c-nav__link" id="expandable-nav-link3" aria-expanded="false">
-              Authentication
-              <span class="pf-c-nav__toggle"
-              >
-                      <i class="fas fa-angle-right" aria-hidden="true"></i>
-              </span>
-            </a>
-            <section class="pf-c-nav__subnav" aria-labelledby="expandable-nav-link3" hidden>
-              <ul class="pf-c-nav__simple-list">
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Subnav link 1
-                  </a>
-                </li>
-                <li class="pf-c-nav__item">
-                  <a href="#" class="pf-c-nav__link">
-                    Subnav link 2
-                  </a>
-                </li>
-              </ul>
-            </section>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <main role="main" class="pf-c-page__main" tabindex="-1" id="main-content-page-layout-expandable-nav">
-    <section class="pf-c-page__main-breadcrumb">
-      <nav class="pf-c-breadcrumb" aria-label="breadcrumb">
-        <ol class="pf-c-breadcrumb__list">
-          <li class="pf-c-breadcrumb__item">
-            <a href="#" class="pf-c-breadcrumb__link">
-              Section home
-            </a>
-            <span class="pf-c-breadcrumb__item-divider">
-              <i class="fas fa-angle-right" aria-hidden="true"></i>
-            </span>
-          </li>
-          <li class="pf-c-breadcrumb__item">
-            <a href="#" class="pf-c-breadcrumb__link">
-              Section title
-            </a>
-            <span class="pf-c-breadcrumb__item-divider">
-              <i class="fas fa-angle-right" aria-hidden="true"></i>
-            </span>
-          </li>
-          <li class="pf-c-breadcrumb__item">
-            <a href="#" class="pf-c-breadcrumb__link">
-              Section title
-            </a>
-            <span class="pf-c-breadcrumb__item-divider">
-              <i class="fas fa-angle-right" aria-hidden="true"></i>
-            </span>
-          </li>
-          <li class="pf-c-breadcrumb__item">
-            <a href="#" class="pf-c-breadcrumb__link pf-m-current" aria-current="page">
-              Section landing
-            </a>
-          </li>
-        </ol>
-      </nav>
-    </section>
-    <section class="pf-c-page__main-section pf-m-light">
-      <div class="pf-c-content">
-        <h1>Main title</h1>
-        <p>This is a demo of the Page component.</p>
-      </div>
-    </section>
-    <section class="pf-c-page__main-section">
-      <div class="pf-l-gallery pf-m-gutter">
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-        <div class="pf-l-gallery__item">
-          <div class="pf-c-card">
-            <div class="pf-c-card__body">
-              This is a card
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-</div>
-</body>
+  onDropdownSelect = event => {
+    this.setState({
+      isDropdownOpen: !this.state.isDropdownOpen
+    });
+  };
+
+  onKebabDropdownToggle = isKebabDropdownOpen => {
+    this.setState({
+      isKebabDropdownOpen
+    });
+  };
+
+  onKebabDropdownSelect = event => {
+    this.setState({
+      isKebabDropdownOpen: !this.state.isKebabDropdownOpen
+    });
+  };
+
+  onNavSelect = result => {
+    this.setState({
+      activeItem: result.itemId
+    });
+  };
+
+  render() {
+    const { isDropdownOpen, isKebabDropdownOpen, activeItem } = this.state;
+
+    const PageNav = (
+      <Nav onSelect={this.onNavSelect} aria-label="Nav">
+        <NavList variant={NavVariants.horizontal}>
+          <NavItem itemId={0} isActive={activeItem === 0}>
+            System Panel
+          </NavItem>
+          <NavItem itemId={1} isActive={activeItem === 1}>
+            Policy
+          </NavItem>
+          <NavItem itemId={2} isActive={activeItem === 2}>
+            Authentication
+          </NavItem>
+          <NavItem itemId={3} isActive={activeItem === 3}>
+            Network Services
+          </NavItem>
+          <NavItem itemId={4} isActive={activeItem === 4}>
+            Server
+          </NavItem>
+        </NavList>
+      </Nav>
+    );
+    const kebabDropdownItems = [
+      <DropdownItem>
+        <BellIcon /> Notifications
+      </DropdownItem>,
+      <DropdownItem>
+        <CogIcon /> Settings
+      </DropdownItem>
+    ];
+    const userDropdownItems = [
+      <DropdownItem>Link</DropdownItem>,
+      <DropdownItem component="button">Action</DropdownItem>,
+      <DropdownItem isDisabled>Disabled Link</DropdownItem>,
+      <DropdownItem isDisabled component="button">
+        Disabled Action
+      </DropdownItem>,
+      <DropdownSeparator />,
+      <DropdownItem>Separated Link</DropdownItem>,
+      <DropdownItem component="button">Separated Action</DropdownItem>
+    ];
+    const PageToolbar = (
+      <Toolbar>
+        <ToolbarGroup className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnLg)}>
+          <ToolbarItem>
+            <Button id="horizontal-example-uid-01" aria-label="Notifications actions" variant={ButtonVariant.plain}>
+              <BellIcon />
+            </Button>
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button id="horizontal-example-uid-02" aria-label="Settings actions" variant={ButtonVariant.plain}>
+              <CogIcon />
+            </Button>
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarItem className={css(accessibleStyles.hiddenOnLg, spacingStyles.mr_0)}>
+            <Dropdown
+              isPlain
+              position="right"
+              onSelect={this.onKebabDropdownSelect}
+              toggle={<KebabToggle onToggle={this.onKebabDropdownToggle} />}
+              isOpen={isKebabDropdownOpen}
+              dropdownItems={kebabDropdownItems}
+            />
+          </ToolbarItem>
+          <ToolbarItem className={css(accessibleStyles.screenReader, accessibleStyles.visibleOnMd)}>
+            <Dropdown
+              isPlain
+              position="right"
+              onSelect={this.onDropdownSelect}
+              isOpen={isDropdownOpen}
+              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>Kyle Baker</DropdownToggle>}
+              dropdownItems={userDropdownItems}
+            />
+          </ToolbarItem>
+        </ToolbarGroup>
+      </Toolbar>
+    );
+
+    const Header = (
+      <PageHeader
+        logo={<Brand src={imgBrand} alt="Patternfly Logo" />}
+        toolbar={PageToolbar}
+        avatar={<Avatar src={imgAvatar} alt="Avatar image" />}
+        topNav={PageNav}
+      />
+    );
+
+    const PageBreadcrumb = (
+      <Breadcrumb>
+        <BreadcrumbItem>Section Home</BreadcrumbItem>
+        <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
+        <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
+        <BreadcrumbItem to="#" isActive>
+          Section Landing
+        </BreadcrumbItem>
+      </Breadcrumb>
+    );
+    const pageId = 'main-content-page-layout-horizontal-nav';
+    const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
+
+    return (
+      <React.Fragment>
+        <Page header={Header} skipToContent={PageSkipToContent} breadcrumb={PageBreadcrumb} mainContainerId={pageId}>
+          <PageSection variant={PageSectionVariants.light}>
+            <TextContent>
+              <Text component="h1">Main Title</Text>
+              <Text component="p">
+                Body text should be Overpass Regular at 16px. It should have leading of 24px because <br />
+                of it’s relative line height of 1.5.
+              </Text>
+            </TextContent>
+          </PageSection>
+          <PageSection>
+            <Gallery gutter="md">
+              {Array.apply(0, Array(10)).map((x, i) => (
+                <GalleryItem key={i}>
+                  <Card>
+                    <CardBody>This is a card</CardBody>
+                  </Card>
+                </GalleryItem>
+              ))}
+            </Gallery>
+          </PageSection>
+        </Page>
+      </React.Fragment>
+    );
+  }
+}
+
+export default PageLayoutHorizontalNav;
