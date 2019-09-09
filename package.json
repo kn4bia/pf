@@ -1,0 +1,21 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@patternfly/react-charts": "^4.7.9",
+    "@patternfly/react-core": "^3.87.3",
+    "@patternfly/react-table": "^2.17.5",
+    "jekyll": "^3.0.0-beta1",
+    "jquery": "^3.4.1",
+    "mysql": "^2.17.1",
+    "patternfly": "^3.59.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
