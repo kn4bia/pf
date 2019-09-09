@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "localhost",
+  host: "rh8",
   user: "dssm",
   password: "ka1ckt1999",
   database: "dssm"
@@ -10,15 +10,14 @@ var con = mysql.createConnection({
 con.connect();
 
   con.query("SELECT * FROM sys", function (err, result, fields) {
-	  if (err) 
-	  { 
+	  if (err)
+	  {
 		 console.error(err);
 	  }
-	  else 
+	  else
 	  {
 		  console.log(result)
 	  }
   });
 
 con.end()
-
